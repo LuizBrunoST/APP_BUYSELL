@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>buySell - Casa</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="w3-theme-dark-grey.css">
+    <link rel="stylesheet" href="w3.css">
+    <script src="main.js?v=1"></script>
+</head>
+<body class="w3-theme-d5" id="bodyMain">
+
+    <!-- modalNome -->
+    <div class="w3-modal" id="modalNome">
+        <div class="w3-modal-content">
+            <header class="w3-container w3-dark-gray">
+                <span onclick="document.getElementById('modalNome').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h2>Insira o seu nome</h2>
+            </header>
+
+            <div class="w3-container w3-dark-gray">
+                <p>Nome:</p>
+                <input class="w3-input" id="inputNome" placeholder="Seu nome">
+            </div>
+
+            <footer class="w3-container w3-dark-gray">
+                <span class="w3-button w3-theme-d5 w3-round" onclick="salvarNome()">Salvar</span>
+            </footer>
+        </div>
+    </div>
+    <!-- modalNome -->
+
+    <!-- modalAjuda -->
+    <div class="w3-modal" id="modalAjuda">
+        <div class="w3-modal-content">
+            <header class="w3-container w3-dark-gray">
+                <span onclick="document.getElementById('modalAjuda').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h2>Ajuda</h2>
+            </header>
+
+            <div class="w3-container w3-dark-gray">
+                Como funciona:<br>
+                1 Selecione o par de moeda.<br>
+                2 Selecione o time freme (tempo da compra).<br>
+                3 Clique em testar.
+            </div>
+
+            <footer class="w3-container w3-dark-gray">
+                <i>v0.0.1</i>
+            </footer>
+        </div>
+    </div>
+    <!-- modalAjuda -->
+
+    <!-- modalSinais -->
+    <div class="w3-modal" id="modalSinais">
+        <div class="w3-modal-content">
+            <header class="w3-container w3-dark-gray">
+                <span onclick="document.getElementById('modalSinais').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h2>Sinais</h2>
+            </header>
+
+            <div class="w3-container w3-dark-gray">
+                
+            </div>
+
+            <footer class="w3-container w3-dark-gray">
+                <span class="w3-button w3-theme-d5 w3-round" onclick="gerarSinais()">Gerar</span>
+                <span class="w3-button w3-theme-d5 w3-round" onclick="salvarSinais()">Salvar</span>
+            </footer>
+        </div>
+    </div>
+    <!-- modalSinais -->
+
+    <!-- Bloco Main -->
+    <div class="w3-bar w3-theme-d4 w3-card-4">
+        <span class="w3-bar-item w3-button">Casa</span>
+        <span class="w3-bar-item w3-button" onclick="document.getElementById('modalSinais').style.display='block'">Sinais</span>
+        <span class="w3-bar-item w3-button" onclick="window.alert('Este recurso ainda não está habilitado')">Mercado</span>
+        <span class="w3-bar-item w3-button" onclick="document.getElementById('modalAjuda').style.display='block'">Ajuda</span>
+    </div>
+
+    <div class="w3-row-padding">
+        <div class="w3-third" style="margin-top: 100px;">
+            <span>Selecione o par:</span><br>
+            <select class="w3-select">
+                <option value="" disabled selected>Selecione o par</option>
+                <option>EUR/USD</option>
+            </select>
+        </div>
+        <div class="w3-third" style="width: 150px;">
+            <span>Time Frame:</span><br>
+            <select class="w3-select">
+                <option>1M</option>
+                <option>5M</option>
+            </select>
+        </div>
+        <div class="w3-third" style="width: 150px; float: right;">
+            <span>Tempo: <span style="float: right;" id="tempo"></span></span>
+            <br><button class="w3-button w3-dark-gray w3-round" onclick="testar()">Testar</button>
+        </div>
+    </div>
+
+    <div class="w3-container" id="testarbuySell" style="margin: auto; margin-top: 100px;">
+        <span class="w3-btn w3-xxxlarge w3-green" style="display: none; margin: auto;">Buy</span>
+        <span class="w3-btn w3-xxxlarge w3-red" style="display: none; margin: auto;">Sell</span>
+    </div>
+    
+    <div style="position: absolute; bottom: 0; margin-left: 10px;">
+        <p><span id="data"></span> <span id="hora"></span> <span id="userNome"></span></p>
+    </div>
+    <!-- Bloco Main -->
+<script>
+//=============== Inicio do JavaScript ===============//
+//=============== Definido a data atual
+d = new Date()
+dia = d.getUTCDate()
+mes = d.getMonth()+1
+ano = d.getFullYear()
+
+data = document.getElementById("data")
+data.innerHTML = dia + "/" + mes + "/" + ano
+
+function pad(s) { /* Completa com zeros numeros com 1 digito */
+    return (s < 10) ? '0' + s : s;
+}
+
+function newData(){ /* Obter a hora e aplica ao objeto*/
+    var date = new Date();
+    hora.innerHTML=[date.getHours(), date.getMinutes(),date.getSeconds()].map(pad).join(':');
+}
+
+setInterval(function(){ /* Atualizar a hora em tempo real */
+    newData();
+},500);
+
+
+inputNome = document.getElementById("inputNome")
+function salvarNome(){
+    localStorage.setItem("Nome", inputNome.value)
+}
+function gerarSinais(){
+    window.alert("Este recurso ainda não está habilitado.")
+}
+function salvarSinais(){
+    window.alert("Este recurso ainda não está habilitado.")
+}
+
+
+//=============== Verificando se à conecxao com a internet.
+bodyMain = document.getElementById("bodyMain")
+Conecxao = window.navigator.onLine
+if(Conecxao == false){
+    bodyMain.style.display='none'
+}
+
+//=============== Fim do JavaScript ===============//
+</script>
+</body>
+</html>
